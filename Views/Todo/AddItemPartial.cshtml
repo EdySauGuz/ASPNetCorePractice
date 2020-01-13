@@ -1,0 +1,25 @@
+@model TodoItem
+    <form asp-action="AddItem" method="POST">
+        <div class="container">
+            <div class="row">
+                <div class="col-5">
+                    <label asp-for="Title">Agregar nueva tarea:</label>
+                    <input asp-for="Title" class="w-25">
+                </div>
+                <div class="col-1">
+                    <label asp-for="DueAt">Fecha:</label>
+                </div>
+                <div class="col-5">
+                    <div class="input-group date" data-provide="datepicker">
+                        <input asp-for="DueAt" type="text" class="form-control">
+                        <div class="input-group-append">
+                            <span class="input-group-text"><i class="mdi mdi-calendar"></i></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-1">
+                    <button type="submit">Agregar</button>
+                </div>
+            </div>
+        </div>
+    </form>
