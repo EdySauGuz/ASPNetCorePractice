@@ -49,17 +49,7 @@ namespace AspNetCoreTodo
                 ILogger logger = loggerFactory.CreateLogger<SeedData>();
                 logger.LogInformation("Agregando rol a usuario");*/
             
-            if (testAdmin != null){
-                return;
-            }else{
-                //await userManager.RemovePasswordAsync(testAdmin);
-                //await userManager.AddPasswordAsync(testAdmin,"Admin.123");
-                //var ec = await userManager.IsEmailConfirmedAsync(testAdmin);
-                //if(ec == false){
-                //    var token = await userManager.GenerateEmailConfirmationTokenAsync(testAdmin);
-                //    await userManager.ConfirmEmailAsync(testAdmin, token);
-                //}
-            }
+            if (testAdmin != null)return;
 
             testAdmin = new IdentityUser
             {
@@ -69,6 +59,12 @@ namespace AspNetCoreTodo
 
             await userManager.CreateAsync(testAdmin, "Admin.123");
             await userManager.AddToRoleAsync(testAdmin, Constants.AdministratorRole);
+            var ec = await userManager.IsEmailConfirmedAsync(testAdmin);
+            if (ec == false)
+            {
+                var token = await userManager.GenerateEmailConfirmationTokenAsync(testAdmin);
+                await userManager.ConfirmEmailAsync(testAdmin, token);
+            }
         }
     }
 }
