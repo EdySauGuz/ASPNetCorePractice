@@ -1,0 +1,52 @@
+@model ManageUsersViewModel
+@using System.Web
+@{
+    ViewData["Title"] = HttpUtility.HtmlDecode("Administraci&oacute;n de Usuarios");
+}
+<h2>@ViewData["Title"]</h2>
+<h3>Administrators</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <td>Id</td>
+            <td>Email</td>
+            <td></td>
+        </tr>
+    </thead>
+    @foreach (var user in Model.Administrators)
+    {
+    <tr>
+        <td>@user.Id</td>
+        <td>@user.Email</td>
+        <td>
+            <form asp-action="DeleteUser" method="POST">
+                <button type="submit"><i class="mdi mdi-delete"></i></button>
+                <input type="hidden" name="Email" value="@user.Email">
+            </form>
+        </td>
+    </tr>
+    }
+</table>
+<h3>Everyone</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <td>Id</td>
+            <td>Email</td>
+            <td></td>
+        </tr>
+    </thead>
+    @foreach (var user in Model.Everyone)
+    {
+    <tr>
+        <td>@user.Id</td>
+        <td>@user.Email</td>
+        <td>
+            <form asp-action="DeleteUser" method="POST">
+                <button type="submit"><i class="mdi mdi-delete"></i></button>
+                <input type="hidden" name="Email" value="@user.Email">
+            </form>
+        </td>
+    </tr>
+    }
+</table>
